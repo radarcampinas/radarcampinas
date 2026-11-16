@@ -10,6 +10,6 @@ window.APOIO = {
    goatcounter: só o código da sua conta, ex.: "radarcampinas" (endereço radarcampinas.goatcounter.com)
    contatoEmail: e-mail do projeto, ex.: "contato@exemplo.com" */
 window.SITE = {
-  goatcounter: "",
-  contatoEmail: "",
+  goatcounter: "radarcampinas",
+  contatoEmail: "campinasradar@gmail.com",
 };
