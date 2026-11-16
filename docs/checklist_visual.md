@@ -82,3 +82,80 @@ Servidor: `node scripts/servir.js site 8768`. Teste cada página no computador e
 - [ ] Botão "Entenda o site em 1 minuto" e item "Sobre" do menu
 - [ ] Rodapé com "Dados atualizados…"
 - [ ] Foto que não carrega (aparece as iniciais)
+
+## Páginas estáticas para o Google (testar no computador e no celular)
+
+Cada uma tem um resumo em HTML e o botão "Ver a página completa e interativa". Confira: título legível, números iguais aos do site, links funcionando, sem texto sobreposto.
+
+- [ ] [#/privacidade](http://127.0.0.1:8768/#/privacidade) — Privacidade e termos (revise o texto com atenção)
+- [ ] [vereadores/](http://127.0.0.1:8768/vereadores/) — Lista de vereadores
+- [ ] [leis/](http://127.0.0.1:8768/leis/) — Leis
+- [ ] [gastos/](http://127.0.0.1:8768/gastos/) — Gastos
+- [ ] [licitacoes/](http://127.0.0.1:8768/licitacoes/) — Licitações
+- [ ] [pedidos-repetidos/](http://127.0.0.1:8768/pedidos-repetidos/) — Pedidos repetidos
+- [ ] [bairros/](http://127.0.0.1:8768/bairros/) — Lista de bairros
+- [ ] [sobre/](http://127.0.0.1:8768/sobre/) — Sobre
+
+**Grupos de propostas**
+
+- [ ] [grupo/homenagens/](http://127.0.0.1:8768/grupo/homenagens/) — homenagens
+- [ ] [grupo/outros/](http://127.0.0.1:8768/grupo/outros/) — outros
+- [ ] [grupo/pedidos-de-melhoria/](http://127.0.0.1:8768/grupo/pedidos-de-melhoria/) — pedidos de melhoria
+- [ ] [grupo/perguntas-e-cobrancas/](http://127.0.0.1:8768/grupo/perguntas-e-cobrancas/) — perguntas e cobrancas
+- [ ] [grupo/propostas-de-lei/](http://127.0.0.1:8768/grupo/propostas-de-lei/) — propostas de lei
+
+**Bairros (amostra; existem 250)**
+
+- [ ] [bairro/jardim-nilopolis/](http://127.0.0.1:8768/bairro/jardim-nilopolis/) — jardim nilopolis
+- [ ] [bairro/jardim-chapadao/](http://127.0.0.1:8768/bairro/jardim-chapadao/) — jardim chapadao
+- [ ] [bairro/barao-geraldo/](http://127.0.0.1:8768/bairro/barao-geraldo/) — barao geraldo
+- [ ] [bairro/bonfim/](http://127.0.0.1:8768/bairro/bonfim/) — bonfim
+- [ ] [bairro/parque-rural-fazenda-santa-candida/](http://127.0.0.1:8768/bairro/parque-rural-fazenda-santa-candida/) — parque rural fazenda santa candida
+- [ ] [bairro/conjunto-habitacional-vila-santana/](http://127.0.0.1:8768/bairro/conjunto-habitacional-vila-santana/) — conjunto habitacional vila santana
+
+**Vereadores (38)**
+
+- [ ] [vereador/ailton-da-farmacia/](http://127.0.0.1:8768/vereador/ailton-da-farmacia/) — ailton da farmacia
+- [ ] [vereador/arnaldo-salvetti/](http://127.0.0.1:8768/vereador/arnaldo-salvetti/) — arnaldo salvetti
+- [ ] [vereador/bene-lima/](http://127.0.0.1:8768/vereador/bene-lima/) — bene lima
+- [ ] [vereador/cabo-muller/](http://127.0.0.1:8768/vereador/cabo-muller/) — cabo muller
+- [ ] [vereador/carlinhos-camelo/](http://127.0.0.1:8768/vereador/carlinhos-camelo/) — carlinhos camelo
+- [ ] [vereador/carmo-luiz/](http://127.0.0.1:8768/vereador/carmo-luiz/) — carmo luiz
+- [ ] [vereador/debora-palermo/](http://127.0.0.1:8768/vereador/debora-palermo/) — debora palermo
+- [ ] [vereador/dr-yanko/](http://127.0.0.1:8768/vereador/dr-yanko/) — dr yanko
+- [ ] [vereador/edison-ribeiro/](http://127.0.0.1:8768/vereador/edison-ribeiro/) — edison ribeiro
+- [ ] [vereador/eduardo-magoga/](http://127.0.0.1:8768/vereador/eduardo-magoga/) — eduardo magoga
+- [ ] [vereador/evelyn-do-pt/](http://127.0.0.1:8768/vereador/evelyn-do-pt/) — evelyn do pt
+- [ ] [vereador/fernanda-souto/](http://127.0.0.1:8768/vereador/fernanda-souto/) — fernanda souto
+- [ ] [vereador/filipe-marchesi/](http://127.0.0.1:8768/vereador/filipe-marchesi/) — filipe marchesi
+- [ ] [vereador/guida-calixto/](http://127.0.0.1:8768/vereador/guida-calixto/) — guida calixto
+- [ ] [vereador/guilherme-teixeira/](http://127.0.0.1:8768/vereador/guilherme-teixeira/) — guilherme teixeira
+- [ ] [vereador/gustavo-petta/](http://127.0.0.1:8768/vereador/gustavo-petta/) — gustavo petta
+- [ ] [vereador/hebert-ganem/](http://127.0.0.1:8768/vereador/hebert-ganem/) — hebert ganem
+- [ ] [vereador/higor-diego/](http://127.0.0.1:8768/vereador/higor-diego/) — higor diego
+- [ ] [vereador/luis-yabiku/](http://127.0.0.1:8768/vereador/luis-yabiku/) — luis yabiku
+- [ ] [vereador/luiz-cirilo/](http://127.0.0.1:8768/vereador/luiz-cirilo/) — luiz cirilo
+- [ ] [vereador/luiz-rossini/](http://127.0.0.1:8768/vereador/luiz-rossini/) — luiz rossini
+- [ ] [vereador/marcelo-silva/](http://127.0.0.1:8768/vereador/marcelo-silva/) — marcelo silva
+- [ ] [vereador/mariana-conti/](http://127.0.0.1:8768/vereador/mariana-conti/) — mariana conti
+- [ ] [vereador/marrom-cunha/](http://127.0.0.1:8768/vereador/marrom-cunha/) — marrom cunha
+- [ ] [vereador/mineiro-do-espetinho/](http://127.0.0.1:8768/vereador/mineiro-do-espetinho/) — mineiro do espetinho
+- [ ] [vereador/nelson-hossri/](http://127.0.0.1:8768/vereador/nelson-hossri/) — nelson hossri
+- [ ] [vereador/nick-schneider/](http://127.0.0.1:8768/vereador/nick-schneider/) — nick schneider
+- [ ] [vereador/otto-alejandro/](http://127.0.0.1:8768/vereador/otto-alejandro/) — otto alejandro
+- [ ] [vereador/paolla-miguel/](http://127.0.0.1:8768/vereador/paolla-miguel/) — paolla miguel
+- [ ] [vereador/paulo-haddad/](http://127.0.0.1:8768/vereador/paulo-haddad/) — paulo haddad
+- [ ] [vereador/perminio-monteiro/](http://127.0.0.1:8768/vereador/perminio-monteiro/) — perminio monteiro
+- [ ] [vereador/roberto-alves/](http://127.0.0.1:8768/vereador/roberto-alves/) — roberto alves
+- [ ] [vereador/rodrigo-farmadic/](http://127.0.0.1:8768/vereador/rodrigo-farmadic/) — rodrigo farmadic
+- [ ] [vereador/rubens-gas/](http://127.0.0.1:8768/vereador/rubens-gas/) — rubens gas
+- [ ] [vereador/tak/](http://127.0.0.1:8768/vereador/tak/) — tak
+- [ ] [vereador/vini-oliveira/](http://127.0.0.1:8768/vereador/vini-oliveira/) — vini oliveira
+- [ ] [vereador/wagner-romao/](http://127.0.0.1:8768/vereador/wagner-romao/) — wagner romao
+- [ ] [vereador/ze-carlos/](http://127.0.0.1:8768/vereador/ze-carlos/) — ze carlos
+
+**Arquivos técnicos**
+
+- [ ] [sitemap.xml](http://127.0.0.1:8768/sitemap.xml) — sitemap.xml
+- [ ] [robots.txt](http://127.0.0.1:8768/robots.txt) — robots.txt
+- [ ] [og.png](http://127.0.0.1:8768/og.png) — og.png

@@ -18,6 +18,10 @@ PADROES = {"CPF": P.CPF_FORMATADO, "RG": re.compile(r"\bRG\b[\s.,:nNºo°-]{0,12
 # CEP e "sito à" só importam nas compras e contratos (ali indicavam a residência de uma pessoa contratada); nos pedidos de obra do vereador
 # o CEP é de rua pública e faz parte do texto oficial.
 PADROES_ESTRITOS = {"CEP": P.CEP, "endereço residencial (sito à)": re.compile(r"\bsito\s+[àa]\b", re.I)}
+# o e-mail de contato do projeto, escolhido de propósito em site/config.js, é permitido (qualquer outro e-mail continua bloqueado)
+_cfg = (site / "config.js").read_text(encoding="utf-8") if (site / "config.js").exists() else ""
+_m = re.search(r'contatoEmail\s*:\s*"([^"]+)"', _cfg)
+PERMITIDOS = {_m.group(1).strip().lower()} if _m else set()
 achados = []
 for f in sorted(list(site.rglob("*.json")) + list(site.rglob("*.js")) + list(site.rglob("*.html"))):
     if "partidos" in f.parts:
@@ -33,6 +37,8 @@ for f in sorted(list(site.rglob("*.json")) + list(site.rglob("*.js")) + list(sit
                 ctx = t[max(0, m.start() - 12): m.start()]
                 if re.search(r"[\d.]\s?$", ctx) or re.search(r"\d,$", ctx):  # parte de número maior (valores em reais, ids)
                     continue
+            if nome == "e-mail" and (m.group(0).lower() in PERMITIDOS or m.group(0).lower().endswith("@exemplo.com")):
+                continue
             if f.name == "app.js" and nome == "e-mail":
                 continue
             achados.append((f.relative_to(site), nome, t[max(0, m.start() - 40): m.end() + 20].replace("\n", " ")))

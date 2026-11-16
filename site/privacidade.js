@@ -13,6 +13,23 @@ function atualizarLinkReportar() {
   document.querySelectorAll("a[data-reportar]").forEach(a => { a.href = urlReportarErro(); });
 }
 
+/* ---- medição de visitas (só se SITE.goatcounter estiver preenchido) ---- */
+function medirPagina() {
+  if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: location.pathname + location.hash});
+}
+function iniciarMedicao() {
+  const cod = ((window.SITE || {}).goatcounter || "").trim();
+  if (!/^[a-z0-9-]{2,40}$/i.test(cod) || document.getElementById("gc-script")) return;
+  window.goatcounter = {no_onload: true, allow_local: false};
+  const s = document.createElement("script");
+  s.id = "gc-script"; s.async = true; s.src = "https://gc.zgo.at/count.js";
+  s.dataset.goatcounter = `https://${cod}.goatcounter.com/count`;
+  s.onload = medirPagina;
+  document.head.appendChild(s);
+}
+const emailContato = () => { const e = ((window.SITE || {}).contatoEmail || "").trim(); return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) ? e : ""; };
+const temMedicao = () => /^[a-z0-9-]{2,40}$/i.test(((window.SITE || {}).goatcounter || "").trim());
+
 function paginaPrivacidade() {
   document.title = "Privacidade e termos — Radar Campinas";
   $app.innerHTML = `<div class="pag sobre">
@@ -23,8 +40,8 @@ function paginaPrivacidade() {
 
     <h2>O que o site coleta</h2>
     <ul class="nao-faz">
-      <li><b>Nada seu.</b> Não há cadastro, login, formulário nem cookies do site. Não medimos visitas com ferramentas de rastreamento.</li>
-      <li><b>Servidores de terceiros veem o seu acesso.</b> Como qualquer site, o endereço de internet (IP) de quem acessa pode ser registrado por quem entrega os arquivos: o <b>GitHub</b> (onde o site está hospedado), o <b>Google Fonts</b> (que entrega a fonte das letras) e o site da <b>Câmara Municipal</b> (de onde vêm as fotos dos vereadores). Cada um tem a sua própria política de privacidade.</li>
+      <li><b>Nada seu.</b> Não há cadastro, login, formulário nem cookies do site. ${temMedicao() ? 'Contamos quantas pessoas visitam cada página com o <b>GoatCounter</b>, uma ferramenta que não usa cookies e foi feita para não identificar quem visita (só contagens, como página, país e tipo de aparelho).' : 'Não medimos visitas com ferramentas de rastreamento.'}</li>
+      <li><b>Servidores de terceiros veem o seu acesso.</b> Como qualquer site, o endereço de internet (IP) de quem acessa pode ser registrado por quem entrega os arquivos: o <b>GitHub</b> (onde o site está hospedado), o <b>Google Fonts</b> (que entrega a fonte das letras), o site da <b>Câmara Municipal</b> (de onde vêm as fotos dos vereadores)${temMedicao() ? ' e o <b>GoatCounter</b> (contagem de visitas)' : ''}. Cada um tem a sua própria política de privacidade.</li>
       <li><b>Links para fora.</b> Ao clicar em um link para a Câmara, o TCE-SP, o PNCP ou o Apoia.se, você sai deste site e passa a valer a política do site de destino.</li>
     </ul>
 
@@ -37,7 +54,7 @@ function paginaPrivacidade() {
     </ul>
 
     <h2>Quer corrigir ou tirar algo?</h2>
-    <p>Se encontrar um erro, ou se alguma informação sua aparecer aqui e você achar que não devia, use o botão <a href="${urlReportarErro()}" target="_blank" rel="noopener" data-reportar>Reportar erro</a>. Ele abre um formulário no GitHub (é preciso ter uma conta gratuita lá). <b>Não escreva dados pessoais no formulário: ele é público.</b></p>
+    <p>Se encontrar um erro, ou se alguma informação sua aparecer aqui e você achar que não devia, use o botão <a href="${urlReportarErro()}" target="_blank" rel="noopener" data-reportar>Reportar erro</a>. Ele abre um formulário no GitHub (é preciso ter uma conta gratuita lá). <b>Não escreva dados pessoais no formulário: ele é público.</b>${emailContato() ? ` Se preferir não usar o GitHub, escreva para <a href="mailto:${emailContato()}">${emailContato()}</a>.` : ''}</p>
     <p class="suave">Quando o erro é do próprio documento oficial, o caminho é pedir a correção ao órgão que o publicou. Os erros nossos que já corrigimos ficam anotados na página <a href="#/transparencia">Transparência</a>.</p>
 
     <h2>Termos de uso</h2>

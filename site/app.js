@@ -26,6 +26,7 @@ async function iniciar() {
     [GERAL, GRAF] = await Promise.all([json("dados/geral.json"), json("dados/graficos.json")]);
     await Promise.all([carregarVerificacao(), carregarRecentes(), carregarAfast(), carregarAtualizacao()]);
     document.getElementById("rodape").innerHTML = rodape();
+    iniciarMedicao();
     document.getElementById("dataTopo").innerHTML = `Atualizado em <b>${quandoAtualizou()}</b>`;
     rotear();
   } catch (e) {
@@ -78,7 +79,7 @@ function rodape() {
   <strong>Estimativa</strong> ou <strong>Não confirmado</strong>. Os grupos de propostas, os tipos de pedido e a leitura de rua e bairro são regras nossas, não classificação oficial da Câmara.
   O texto de cada proposta (em letras maiúsculas) é copiado do registro oficial. <a href="#/transparencia">Veja a página Transparência</a>: fontes, conferências, o que não conseguimos confirmar e os erros nossos que já corrigimos.</p>
   <p class="suave">Logos dos partidos: Wikimedia Commons, arquivos marcados como domínio público.</p>
-  <p class="rodape-links"><a href="#/privacidade">Privacidade e termos</a> · <a href="#/sobre">Entenda o site</a> · <a href="https://github.com/radarcampinas/radarcampinas/issues/new" target="_blank" rel="noopener" data-reportar>Reportar erro</a></p>`;
+  <p class="rodape-links"><a href="#/privacidade">Privacidade e termos</a> · <a href="#/sobre">Entenda o site</a> · <a href="https://github.com/radarcampinas/radarcampinas/issues/new" target="_blank" rel="noopener" data-reportar>Reportar erro</a>${emailContato() ? ` · <a href="mailto:${emailContato()}">Contato</a>` : ""}</p>`;
 }
 
 function marcarNav(rota) {
@@ -88,6 +89,7 @@ function marcarNav(rota) {
 function rotear() {
   window.scrollTo(0, 0);
   atualizarLinkReportar();
+  medirPagina();
   pararSalariometro();
   const m = location.hash.match(/^#\/v\/(\d+)/);
   if (m) { marcarNav("inicio"); return paginaVereador(+m[1]); }
