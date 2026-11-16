@@ -1,0 +1,157 @@
+{
+ "mesa": {
+  "titulo": "Mesa Diretora (01/01/2025 - 31/12/2026)",
+  "cargos": {
+   "33": "Presidente",
+   "318": "1º Vice-Presidente",
+   "324": "2º Vice-Presidente",
+   "344": "1º Secretário",
+   "319": "2º Secretário",
+   "328": "3º Secretário",
+   "347": "4º Secretário",
+   "296": "Corregedor",
+   "306": "Corregedor Substituto"
+  }
+ },
+ "eventos": {
+  "280": [
+   {
+    "d": "2025-05-05",
+    "t": "saida",
+    "r": "Passou a ocupar cargo de secretário municipal; o suplente foi convocado.",
+    "e": "CONSIDERANDO A INVESTIDURA DO VEREADOR LUIZ CIRILO NO CARGO DE SECRETÁRIO MUNICIPAL, FICA CONVOCADO O PRIMEIRO SUPLENTE DO PODEMOS (PODE), O EXCELENTÍSSIMO SENHOR GILBERTO LEÃO, PARA TOMAR POSSE COMO VEREADOR.",
+    "n": 56396,
+    "nome": "Ato da Presidência nº 92, de 05 de maio de 2025"
+   }
+  ],
+  "349": [
+   {
+    "d": "2025-05-05",
+    "t": "assumiu",
+    "r": "Suplente que assumiu a cadeira.",
+    "e": "CONSIDERANDO A INVESTIDURA DO VEREADOR LUIZ CIRILO NO CARGO DE SECRETÁRIO MUNICIPAL, FICA CONVOCADO O PRIMEIRO SUPLENTE DO PODEMOS (PODE), O EXCELENTÍSSIMO SENHOR GILBERTO LEÃO, PARA TOMAR POSSE COMO VEREADOR.",
+    "n": 56396,
+    "nome": "Ato da Presidência nº 92, de 05 de maio de 2025"
+   },
+   {
+    "d": "2026-04-06",
+    "t": "assumiu",
+    "r": "Suplente que assumiu a cadeira.",
+    "e": "CONSIDERANDO A INVESTIDURA DO VEREADOR EDUARDO MAGOGA NO CARGO DE SECRETÁRIO MUNICIPAL, FICA CONVOCADO O PRIMEIRO SUPLENTE DO PODEMOS (PODE), O EXCELENTÍSSIMO SENHOR GILBERTO LEÃO, PARA TOMAR POSSE COMO VEREADOR.",
+    "n": 57969,
+    "nome": "Ato da Presidência nº 18, de 06 de abril de 2026"
+   }
+  ],
+  "266": [
+   {
+    "d": "2025-06-30",
+    "t": "saida",
+    "r": "Renunciou ao mandato.",
+    "e": "CONSIDERANDO A RENÚNCIA DO SENHOR ZÉ CARLOS, CONFORME PROTOCOLO CMC-ADM-2025/00254, FICA CONVOCADO O PRIMEIRO SUPLENTE DO PSB (PARTIDO SOCIALISTA BRASILEIRO), O EXCELENTÍSSIMO SENHOR AÍLTON DA FARMÁCIA, PARA TOMAR POSSE COMO VEREADOR.",
+    "n": 56638,
+    "nome": "Ato da Presidência nº 117, de 30 de junho de 2025"
+   }
+  ],
+  "311": [
+   {
+    "d": "2025-06-30",
+    "t": "assumiu",
+    "r": "Suplente que assumiu a cadeira.",
+    "e": "CONSIDERANDO A RENÚNCIA DO SENHOR ZÉ CARLOS, CONFORME PROTOCOLO CMC-ADM-2025/00254, FICA CONVOCADO O PRIMEIRO SUPLENTE DO PSB (PARTIDO SOCIALISTA BRASILEIRO), O EXCELENTÍSSIMO SENHOR AÍLTON DA FARMÁCIA, PARA TOMAR POSSE COMO VEREADOR.",
+    "n": 56638,
+    "nome": "Ato da Presidência nº 117, de 30 de junho de 2025"
+   }
+  ],
+  "350": [
+   {
+    "d": "2025-10-24",
+    "t": "so_sessao",
+    "r": "Suplente convocado só para uma sessão (29 de outubro de 2025).",
+    "e": "CONVOCAR O PRIMEIRO SUPLENTE DO PARTIDO SOCIAL DEMOCRÁTICO (PSD), CABO MULLER, PARA TOMAR POSSE COMO VEREADOR, PARA PARTICIPAR ÚNICA E EXCLUSIVAMENTE DA DELIBERAÇÃO NA REUNIÃO ORDINÁRIA DO DIA 29 DE OUTUBRO DE 2025, ACERCA DE DENÚNCIA FORMULADA PELO VEREADOR NELSON HOSSRI, FACE À VEREADORA MARIANA CONTI (PSOL), ATRAVÉS DO PROTOCOLO CMC-ADM-2025/00401.",
+    "n": 57306,
+    "nome": "Ato da Presidência nº 164, de 24 de outubro de 2025"
+   }
+  ],
+  "324": [
+   {
+    "d": "2026-04-06",
+    "t": "saida",
+    "r": "Passou a ocupar cargo de secretário municipal; o suplente foi convocado.",
+    "e": "CONSIDERANDO A INVESTIDURA DO VEREADOR EDUARDO MAGOGA NO CARGO DE SECRETÁRIO MUNICIPAL, FICA CONVOCADO O PRIMEIRO SUPLENTE DO PODEMOS (PODE), O EXCELENTÍSSIMO SENHOR GILBERTO LEÃO, PARA TOMAR POSSE COMO VEREADOR.",
+    "n": 57969,
+    "nome": "Ato da Presidência nº 18, de 06 de abril de 2026"
+   }
+  ],
+  "15": [
+   {
+    "d": "2026-06-01",
+    "t": "so_sessao",
+    "r": "Suplente convocado só para uma sessão (1 de junho de 2026).",
+    "e": "RESOLVE CONVOCAR O PRIMEIRO SUPLENTE DO PARTIDO SOCIALISMO E LIBERDADE (PSOL), PAULO BUFALO, PARA TOMAR POSSE COMO VEREADOR, PARA PARTICIPAR ÚNICA E EXCLUSIVAMENTE DA DELIBERAÇÃO NA REUNIÃO ORDINÁRIA DO DIA 1º DE JUNHO DE 2026, ACERCA DE DENÚNCIA FORMULADA PELO VEREADORA MARIANA CONTI, FACE AO VEREADOR VINI OLIVEIRA (CIDAD), ATRAVÉS DO PROTOCOLO CMC-ADM-2026/00394.",
+    "n": 58283,
+    "nome": "Ato da Presidência nº 42, de 01 de junho de 2026"
+   },
+   {
+    "d": "2026-09-04",
+    "t": "so_sessao",
+    "r": "Suplente convocado só para uma sessão (09 de setembro de 2026).",
+    "e": "RESOLVE CONVOCAR O PRIMEIRO SUPLENTE DO PARTIDO SOCIALISMO E LIBERDADE (PSOL), PAULO BUFALO, PARA TOMAR POSSE COMO VEREADOR, PARA PARTICIPAR ÚNICA E EXCLUSIVAMENTE DA DELIBERAÇÃO NA SESSÃO DE JULGAMENTO A SER REALIZADA NO DIA 09 DE SETEMBRO DE 2026, ACERCA DE DENÚNCIA FORMULADA PELA VEREADORA MARIANA CONTI, FACE AO VEREADOR VINI OLIVEIRA, ATRAVÉS DO PROTOCOLO CMC-ADM-2026/00394.",
+    "n": 58743,
+    "nome": "Ato da Presidência nº 182, de 04 de setembro de 2026"
+   }
+  ],
+  "351": [
+   {
+    "d": "2026-07-31",
+    "t": "so_sessao",
+    "r": "Suplente convocado só para uma sessão (03 de agosto de 2026).",
+    "e": "RESOLVE CONVOCAR A SEGUNDA SUPLENTE DO PARTIDO DOS TRABALHADORES (PT), EVELYN SILVA, PARA TOMAR POSSE COMO VEREADORA PARA PARTICIPAR ÚNICA E EXCLUSIVAMENTE DA DELIBERAÇÃO NA REUNIÃO ORDINÁRIA DO DIA 03 DE AGOSTO DE 2026, ACERCA DE DENÚNCIA FORMULADA PELO VEREADORA GUIDA CALIXTO FACE AO VEREADOR ARNALDO SALVETTI (MDB), ATRAVÉS DO PROTOCOLO CMC-ADM-2026/00506.",
+    "n": 58584,
+    "nome": "Ato da Presidência nº 169, de 31 de julho de 2026"
+   }
+  ],
+  "341": [
+   {
+    "d": "2026-09-09",
+    "t": "saida",
+    "r": "Teve o mandato cassado.",
+    "e": "DECRETA A CASSAÇÃO DO MANDATO DO SENHOR VEREADOR DO MUNICÍPIO DE CAMPINAS VINICIUS DE OLIVEIRA SANDOVAL, NOS TERMOS DOS ARTS. 5º, INCISO VI, E 7º, § 1º, AMBOS DO DECRETO-LEI FEDERAL Nº 201, DE 27 DE FEVEREIRO DE 1967, TENDO EM VISTA O PROCESSO POLÍTICO-ADMINISTRATIVO AUTUADO SOB O Nº 246.125 (PROTOCOLO Nº 394/2026) DESTA CÂMARA MUNICIPAL DE CAMPINAS",
+    "n": 58750,
+    "nome": "Decreto Legislativo nº 6.407, de 09 de setembro de 2026"
+   }
+  ],
+  "352": [
+   {
+    "d": "2026-09-10",
+    "t": "assumiu",
+    "r": "Suplente que assumiu a cadeira.",
+    "e": "CONSIDERANDO A CASSAÇÃO DO MANDATO DO SENHOR VINÍCIUS DE OLIVEIRA SANDOVAL, CONFORME DECRETO LEGISLATIVO Nº 6.407 DE 09 DE SETEMBRO DE 2026, FICA CONVOCADO O PRIMEIRO SUPLENTE DO CIDAD (CIDADANIA), O EXCELENTÍSSIMO SENHOR TAK CHUNG WU, PARA TOMAR POSSE COMO VEREADOR.",
+    "n": 58761,
+    "nome": "Ato da Presidência nº 184, de 10 de setembro de 2026"
+   }
+  ]
+ },
+ "fora_da_lista": [
+  {
+   "id": 15,
+   "nome": "Paulo Bufalo",
+   "presencas": 2,
+   "votos": 1
+  },
+  {
+   "id": 279,
+   "nome": "Professor Alberto",
+   "presencas": 0,
+   "votos": 8
+  },
+  {
+   "id": 312,
+   "nome": "Fernando Mendes",
+   "presencas": 0,
+   "votos": 1
+  }
+ ],
+ "sem_vinculo": [],
+ "atos_lidos": 9,
+ "gerado_em": "2026-11-14"
+}

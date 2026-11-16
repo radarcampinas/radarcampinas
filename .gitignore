@@ -1,0 +1,15 @@
+# dados brutos, cópias, logs e testes ficam só no seu computador (centenas de MB)
+data/
+# arquivos do computador e de ferramentas
+.claude/
+.impeccable/
+node_modules/
+*.log
+*.tmp
+Thumbs.db
+.DS_Store
+# imagens de verificação de documentos NUNCA devem ir para o repositório
+**/frente.jpg
+**/verso.jpg
+**/selfie.jpg
+drive-download-*
