@@ -45,6 +45,8 @@ function paginaSobre() {
     <details class="mais-info"><summary>Por que alguns vereadores têm poucas presenças?</summary><p>Alguns assumiram como suplentes no meio do mandato ou saíram. O cadastro da Câmara não informa as datas com precisão, por isso não calculamos porcentagem e avisamos quando a pessoa só aparece nas listas a partir de certo momento.</p></details>
     <details class="mais-info"><summary>Quero ler o documento original. Como faço?</summary><p>Toque no título de uma proposta, de uma votação ou de uma lei: o link abre a página oficial dela no site da Câmara. Compras e contratos abrem no PNCP, e os pagamentos têm link para o portal do TCE-SP.</p></details>
 
+    <details class="mais-info"><summary>Encontrei um erro. O que faço?</summary><p>Use o link <b>Reportar erro</b> no rodapé: ele abre um formulário já com a página preenchida. Veja também a página <a href="#/privacidade">Privacidade e termos</a>.</p></details>
+
     <p style="margin-top:28px"><a class="btn-sec" href="#/">Ver os vereadores ${ico("chev")}</a></p>
   </div>`;
 }
