@@ -62,6 +62,11 @@ function linhaAoVivo() {
   const f = [`Câmara até a sessão de ${dataBR(m.ultima_sessao_com_lista)}`];
   if (V.gastos) f.push(`Gastos (TCE-SP) até ${mesLongo(V.gastos.ultimo)}`);
   if (V.licitacoes) f.push(`Licitações (PNCP) até ${dataBR(V.licitacoes.ultima)}`);
+  const em = ATUAL && ATUAL.em ? ATUAL.em : m.gerado_em + "T00:00:00";
+  const dias = Math.floor((Date.now() - new Date(em).getTime()) / 864e5);
+  if (dias >= 3) {
+    return `<p class="ao-vivo atrasado" role="status"><span class="pulso" aria-hidden="true"></span><b>Atenção: os dados não são atualizados há ${dias} dias</b> · última atualização ${quandoAtualizou()}. Algumas informações podem estar desatualizadas. <span class="suave">· ${f.join(" · ")}</span></p>`;
+  }
   return `<p class="ao-vivo"><span class="pulso" aria-hidden="true"></span><b>Dados atualizados ${haQuanto()}</b> · ${quandoAtualizou()} <span class="suave">· ${f.join(" · ")}</span></p>`;
 }
 

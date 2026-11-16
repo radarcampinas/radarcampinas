@@ -406,3 +406,7 @@ section.dinheiro-cartoes .cabecalho{margin-bottom:18px}
 .apoio-btn{text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border:1px solid #3B4E7A;border-radius:999px;background:transparent;color:#C9D5EE;font:inherit;font-size:.88rem;cursor:pointer}
 .apoio-btn:hover{border-color:#fff;color:#fff}
 .apoio-btn .ic{width:16px;height:16px}
+/* aviso quando os dados ficam 3 dias ou mais sem atualizar */
+.ao-vivo.atrasado{padding:10px 14px;border:1px solid #F5B942;background:rgba(245,185,66,.12);border-radius:10px}
+.ao-vivo.atrasado b{color:#FBBF24}
+.ao-vivo.atrasado .pulso{background:#FBBF24!important;animation:none}
