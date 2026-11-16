@@ -293,7 +293,8 @@ def gerar(semanal):
     antes = json.load(open(SITE / "dados" / "geral.json", encoding="utf-8"))
     try:
         passos = [("gerar_dados.py", "data/raw", "site"), ("gerar_busca.py", "data/raw", "site"), ("gerar_graficos.py", "data/raw", "site"),
-                  ("gerar_gastos.py", "data/raw", "site"), ("gerar_licitacoes.py", "data/raw", "site"), ("gerar_leis.py", "data/raw", "site")]
+                  ("gerar_gastos.py", "data/raw", "site"), ("gerar_licitacoes.py", "data/raw", "site"), ("gerar_leis.py", "data/raw", "site"),
+                  ("gerar_paginas.py", "site")]  # páginas estáticas, sitemap e robots para o Google (usa os JSON recém-gerados)
         if semanal:
             passos.append(("gerar_afastamentos.py", "data/raw", "site"))
         passos.append(("conferir.py", "data/raw", "site", "data"))

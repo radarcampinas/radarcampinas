@@ -22,6 +22,13 @@ python -I -X utf8 scripts/conferir.py data/raw site data   # refaz as conferênc
 ```
 Para refazer um endpoint, apague o `.jsonl` correspondente em `data/raw`.
 
+## Páginas para o Google
+```bash
+python -I -X utf8 scripts/gerar_paginas.py site   # vereador/, bairro/, grupo/, leis/, gastos/..., sitemap.xml e robots.txt
+```
+O site principal usa endereços com `#`, que o Google ignora; estas páginas estáticas (com título, descrição e resumo em HTML) são o que o Google indexa. A atualização diária já roda este passo. Para mudar o endereço base (domínio próprio): `RADAR_BASE=https://meudominio.com.br/ python ... gerar_paginas.py site`.
+Páginas de grupos e bairros NÃO mostram o texto das propostas (pode citar nomes de pessoas e endereços): só número, data, tipo e link oficial.
+
 ## Atualização diária (de madrugada)
 ```bash
 python -I -X utf8 scripts/atualizar.py            # baixa só o que é novo, regera o site e confere

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radarcampinas.github.io/radarcampinas/sitemap.xml
