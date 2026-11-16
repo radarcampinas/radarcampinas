@@ -312,11 +312,30 @@ def gerar(semanal):
         raise
 
 
+def git(*args):
+    env = dict(os.environ, GIT_TERMINAL_PROMPT="0")  # nunca ficar esperando senha: se faltar login, falha e registra
+    r = subprocess.run(["git", *args], cwd=RAIZ, capture_output=True, text=True, encoding="utf-8", errors="replace", env=env)
+    if r.returncode != 0:
+        raise RuntimeError(f"git {' '.join(args[:2])} falhou: {(r.stderr or r.stdout)[-300:].strip()}")
+    return r.stdout
+
+
+def publicar():
+    """Envia só a pasta site/ (e só se mudou) para o GitHub; o GitHub Pages republica sozinho."""
+    git("add", "site")
+    if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=RAIZ).returncode == 0:
+        log("publicar: nada mudou em site/, não há o que enviar"); return
+    git("commit", "-m", f"Atualização dos dados {date.today()}")
+    git("push")
+    log("publicar: enviado ao GitHub (o site é republicado em 1 a 2 minutos)")
+
+
 def main():
     global _log_arq
     ap = argparse.ArgumentParser()
     ap.add_argument("--semanal", action="store_true", help="inclui atos de suplência e Mesa")
     ap.add_argument("--so-baixar", action="store_true"); ap.add_argument("--so-gerar", action="store_true")
+    ap.add_argument("--publicar", action="store_true", help="depois de gerar e conferir, envia site/ para o GitHub (git commit + push)")
     ap.add_argument("--limite-consultas", type=int, default=6000); ap.add_argument("--horas", type=float, default=4)
     a = ap.parse_args()
     LOGS.mkdir(parents=True, exist_ok=True)
@@ -341,6 +360,11 @@ def main():
             sapl_ok = a.so_gerar or resumo["etapas"].get("sapl") == "ok"
             if sapl_ok:
                 gerar(a.semanal); resumo["etapas"]["gerar"] = "ok"
+                if a.publicar:
+                    try:
+                        publicar(); resumo["etapas"]["publicar"] = "ok"
+                    except Exception as e:
+                        resumo["etapas"]["publicar"] = f"erro: {e}"; log(f"ERRO ao publicar: {e}")
             else:
                 resumo["etapas"]["gerar"] = "não feita: a etapa do SAPL não terminou; o site continua com os dados de ontem"
                 log(resumo["etapas"]["gerar"])

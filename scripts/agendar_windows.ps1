@@ -9,7 +9,7 @@ $raiz = (Resolve-Path "$PSScriptRoot\..").Path
 $python = (Get-Command python).Source
 $nome = "Radar Campinas - atualizar dados"
 
-$cmd = "-NoProfile -ExecutionPolicy Bypass -Command `"Set-Location '$raiz'; `$extra = if ((Get-Date).DayOfWeek -eq 'Sunday') { '--semanal' } else { '' }; & '$python' -I -X utf8 scripts\atualizar.py `$extra`""
+$cmd = "-NoProfile -ExecutionPolicy Bypass -Command `"Set-Location '$raiz'; `$extra = if ((Get-Date).DayOfWeek -eq 'Sunday') { '--semanal' } else { '' }; & '$python' -I -X utf8 scripts\atualizar.py --publicar `$extra`""
 $acao = New-ScheduledTaskAction -Execute "powershell.exe" -Argument $cmd -WorkingDirectory $raiz
 $gatilho = New-ScheduledTaskTrigger -Daily -At 3:00AM
 $config = New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 6) -MultipleInstances IgnoreNew -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
