@@ -1,12 +1,41 @@
 {
- "gerado_em": "2026-11-16",
+ "gerado_em": "2026-11-17",
  "presenca_relatorio": {
   "comparados": 38,
-  "iguais": 38,
+  "iguais": 10,
   "periodo": "01/01/2025 a 14/11/2026",
   "sessoes_base_oficial": 169,
-  "sessoes_com_lista_nossa": 163,
-  "diferentes": []
+  "sessoes_com_lista_nossa": 164,
+  "diferentes": [
+   "Ailton da Farmácia",
+   "Arnaldo Salvetti",
+   "Benê Lima",
+   "Carlinhos Camelô",
+   "Debora Palermo",
+   "Dr. Yanko",
+   "Edison Ribeiro",
+   "Fernanda Souto",
+   "Guida Calixto",
+   "Guilherme Teixeira",
+   "Gustavo Petta",
+   "Hebert Ganem",
+   "Higor Diego",
+   "Luis Yabiku",
+   "Luiz Cirilo",
+   "Luiz Rossini",
+   "Marcelo Silva",
+   "Marrom Cunha",
+   "Mineiro do Espetinho",
+   "Otto Alejandro",
+   "Paolla Miguel",
+   "Paulo Haddad",
+   "Permínio Monteiro",
+   "Roberto Alves",
+   "Rodrigo Farmadic",
+   "Rubens Gás",
+   "Tak",
+   "Wagner Romão"
+  ]
  },
  "partido": {
   "comparados": 38,
@@ -18,7 +47,7 @@
  },
  "presenca_ordemdia": {
   "comparados": 38,
-  "iguais": 38
+  "iguais": 10
  },
  "atas": {
   "amostra": 32,
@@ -81,12 +110,12 @@
  },
  "autoria": {
   "comparados": 38,
-  "iguais": 38
+  "iguais": 37
  },
  "votos": {
-  "votacoes_desde_inicio": 4525,
-  "votacoes_nominais": 411,
-  "resumo_confere": 4251,
+  "votacoes_desde_inicio": 4557,
+  "votacoes_nominais": 416,
+  "resumo_confere": 4256,
   "resumo_diverge": 7,
   "votaram_sem_constar_na_presenca": 4,
   "sessoes_nominais_sem_lista": 6,
@@ -96,8 +125,8 @@
   "valor_mensal": 17800,
   "cadeiras": 33,
   "inicio": "2025-01-01",
-  "votacoes_com_cadeiras": 401,
-  "votacoes_total": 411,
+  "votacoes_com_cadeiras": 406,
+  "votacoes_total": 416,
   "norma": {
    "id": 53154,
    "nome": "Resolução nº 1.000, de 19 de abril de 2023",
@@ -141,9 +170,9 @@
   ]
  },
  "licitacoes": {
-  "compras": 3802,
-  "contratos": 2710,
-  "valor_homologado": 2283941123.91,
+  "compras": 3812,
+  "contratos": 2712,
+  "valor_homologado": 2284094882.61,
   "ids_unicos": true,
   "orgaos": [
    "Camprev",
@@ -154,12 +183,12 @@
    "Setec"
   ],
   "primeira": "2025-01-06",
-  "ultima": "2026-11-13"
+  "ultima": "2026-11-16"
  },
  "extracao": {
-  "indicacoes": 21726,
+  "indicacoes": 21782,
   "com_rua": 0.844,
-  "com_bairro": 0.929,
+  "com_bairro": 0.93,
   "amostra_manual": {
    "n": 40,
    "erros_claros_rua_ou_bairro": 3,
