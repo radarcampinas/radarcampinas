@@ -40,7 +40,8 @@ python -I -X utf8 scripts/atualizar.py --semanal  # inclui atos de suplência e 
 - Privacidade: `privacidade.py` tira CPF, RG, endereço residencial, telefone e e-mail dos textos do PNCP/TCE-SP; `auditar_privacidade.py` confere o site inteiro e, se achar algo, a atualização não publica.
 - Relato do dia: `data/logs/atualizacao_AAAA-MM-DD.log`; resumo: `data/logs/ultima.json`.
 - `--publicar`: depois de gerar e conferir, envia só `site/` ao GitHub (commit + push); o agendamento do Windows já usa essa opção. Precisa do login do Git guardado.
-- Agendar no Windows (03:00 todo dia): `powershell -ExecutionPolicy Bypass -File scripts/agendar_windows.ps1`
+- `--pular-se-atualizado`: para a tarefa agendada. Não faz nada se hoje já deu certo, se o servidor pediu para diminuir o ritmo hoje (429/403) ou se já houve 4 tentativas hoje (estado em `data/logs/estado.json`).
+- Agendar no Windows (03:00 + a cada hora até 15:00 + ao entrar no Windows, para refazer se o computador reiniciou): `powershell -ExecutionPolicy Bypass -File scripts/agendar_windows.ps1`
 
 ## Ver o site
 ```bash

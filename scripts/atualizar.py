@@ -331,19 +331,64 @@ def publicar():
     log("publicar: enviado ao GitHub (o site é republicado em 1 a 2 minutos)")
 
 
+def _pid_vivo(pid):
+    """True se o processo ainda existe (a trava de uma atualização interrompida por reinício não deve bloquear a próxima)."""
+    try:
+        import ctypes
+        k = ctypes.windll.kernel32
+        h = k.OpenProcess(0x1000, False, int(pid))  # PROCESS_QUERY_LIMITED_INFORMATION
+        if not h:
+            return False
+        code = ctypes.c_ulong()
+        ok = k.GetExitCodeProcess(h, ctypes.byref(code))
+        k.CloseHandle(h)
+        return bool(ok) and code.value == 259  # STILL_ACTIVE
+    except Exception:
+        return True  # na dúvida, respeita a trava
+
+
+ESTADO = LOGS / "estado.json"
+MAX_TENTATIVAS_POR_DIA = 4
+
+
+def _estado():
+    hoje = str(date.today())
+    try:
+        e = json.loads(ESTADO.read_text(encoding="utf-8"))
+        if e.get("data") == hoje:
+            return e
+    except Exception:
+        pass
+    return {"data": hoje, "tentativas": 0, "concluido": False, "bloqueado": False}
+
+
 def main():
     global _log_arq
     ap = argparse.ArgumentParser()
     ap.add_argument("--semanal", action="store_true", help="inclui atos de suplência e Mesa")
     ap.add_argument("--so-baixar", action="store_true"); ap.add_argument("--so-gerar", action="store_true")
     ap.add_argument("--publicar", action="store_true", help="depois de gerar e conferir, envia site/ para o GitHub (git commit + push)")
+    ap.add_argument("--pular-se-atualizado", action="store_true", help="para a tarefa agendada: não faz nada se hoje já deu certo, se o servidor bloqueou hoje ou se já houve %d tentativas hoje" % MAX_TENTATIVAS_POR_DIA)
     ap.add_argument("--limite-consultas", type=int, default=6000); ap.add_argument("--horas", type=float, default=4)
     a = ap.parse_args()
     LOGS.mkdir(parents=True, exist_ok=True)
     _log_arq = LOGS / f"atualizacao_{date.today()}.log"
     trava = RAIZ / "data" / "atualizar.lock"
     if trava.exists() and time.time() - trava.stat().st_mtime < 6 * 3600:
-        print("já existe uma atualização em andamento (trava com menos de 6 h); saio."); return 0
+        try:
+            dono = int(trava.read_text().strip())
+        except Exception:
+            dono = 0
+        if dono and _pid_vivo(dono):
+            print("já existe uma atualização em andamento (trava de um processo ainda ativo); saio."); return 0
+        print("trava antiga de uma execução interrompida (ex.: reinício do computador); sigo em frente.")
+    est = _estado()
+    if a.pular_se_atualizado:
+        motivo = "hoje já foi atualizado com sucesso" if est["concluido"] else "o servidor pediu para diminuir o ritmo hoje; tento amanhã" if est["bloqueado"] else f"já houve {est['tentativas']} tentativas hoje" if est["tentativas"] >= MAX_TENTATIVAS_POR_DIA else ""
+        if motivo:
+            log(f"pulado: {motivo}"); return 0
+    est["tentativas"] += 1
+    ESTADO.write_text(json.dumps(est), encoding="utf-8")
     trava.write_text(str(os.getpid()))
     inicio = time.time(); resumo = {"inicio": datetime.now().isoformat(timespec="seconds"), "ok": False, "etapas": {}}
     c = Cliente(a.limite_consultas, inicio + a.horas * 3600)
@@ -375,6 +420,9 @@ def main():
     finally:
         resumo.update({"fim": datetime.now().isoformat(timespec="seconds"), "consultas": c.n, "minutos": round((time.time() - inicio) / 60, 1)})
         (LOGS / "ultima.json").write_text(json.dumps(resumo, ensure_ascii=False, indent=1), encoding="utf-8")
+        est["concluido"] = bool(est["concluido"] or (resumo["ok"] and (a.so_gerar or resumo["etapas"].get("sapl") == "ok")))
+        est["bloqueado"] = bool(est["bloqueado"] or any("interrompida" in str(v) for v in resumo["etapas"].values()))
+        ESTADO.write_text(json.dumps(est), encoding="utf-8")
         trava.unlink(missing_ok=True)
         log(f"fim: ok={resumo['ok']} consultas={c.n} minutos={resumo['minutos']}")
         for velho in sorted(LOGS.glob("atualizacao_*.log"))[:-30]:
