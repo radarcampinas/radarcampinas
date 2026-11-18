@@ -170,9 +170,9 @@
   ]
  },
  "licitacoes": {
-  "compras": 3812,
-  "contratos": 2712,
-  "valor_homologado": 2284094882.61,
+  "compras": 3822,
+  "contratos": 2713,
+  "valor_homologado": 2284185850.61,
   "ids_unicos": true,
   "orgaos": [
    "Camprev",
@@ -183,7 +183,7 @@
    "Setec"
   ],
   "primeira": "2025-01-06",
-  "ultima": "2026-11-16"
+  "ultima": "2026-11-17"
  },
  "extracao": {
   "indicacoes": 21867,
