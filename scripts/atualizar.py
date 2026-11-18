@@ -52,7 +52,12 @@ class Cliente:
         for i in range(tentativas):
             if self.n >= self.limite:
                 raise Bloqueado(f"limite de {self.limite} consultas por execução atingido (continua na próxima noite)")
-            if time.time() > self.prazo:
+            agora = time.time()
+            if self.ultimo and agora - self.ultimo > 600:  # mais de 10 min sem consulta: o computador provavelmente foi suspenso
+                self.prazo += agora - self.ultimo
+                log(f"   o computador ficou {int((agora - self.ultimo) / 60)} min parado (suspensão); esse tempo não conta no limite de horas")
+                self.ultimo = agora
+            if agora > self.prazo:
                 raise Bloqueado("tempo máximo da execução atingido (continua na próxima noite)")
             self._esperar()
             self.n += 1
@@ -331,6 +336,15 @@ def publicar():
     log("publicar: enviado ao GitHub (o site é republicado em 1 a 2 minutos)")
 
 
+def manter_acordado(ligar):
+    """Pede ao Windows para não suspender o computador por inatividade enquanto a atualização roda (ES_CONTINUOUS | ES_SYSTEM_REQUIRED)."""
+    try:
+        import ctypes
+        ctypes.windll.kernel32.SetThreadExecutionState(0x80000001 if ligar else 0x80000000)
+    except Exception:
+        pass
+
+
 def _pid_vivo(pid):
     """True se o processo ainda existe (a trava de uma atualização interrompida por reinício não deve bloquear a próxima)."""
     try:
@@ -390,6 +404,7 @@ def main():
     est["tentativas"] += 1
     ESTADO.write_text(json.dumps(est), encoding="utf-8")
     trava.write_text(str(os.getpid()))
+    manter_acordado(True)
     inicio = time.time(); resumo = {"inicio": datetime.now().isoformat(timespec="seconds"), "ok": False, "etapas": {}}
     c = Cliente(a.limite_consultas, inicio + a.horas * 3600)
     try:
@@ -421,8 +436,9 @@ def main():
         resumo.update({"fim": datetime.now().isoformat(timespec="seconds"), "consultas": c.n, "minutos": round((time.time() - inicio) / 60, 1)})
         (LOGS / "ultima.json").write_text(json.dumps(resumo, ensure_ascii=False, indent=1), encoding="utf-8")
         est["concluido"] = bool(est["concluido"] or (resumo["ok"] and (a.so_gerar or resumo["etapas"].get("sapl") == "ok")))
-        est["bloqueado"] = bool(est["bloqueado"] or any("interrompida" in str(v) for v in resumo["etapas"].values()))
+        est["bloqueado"] = bool(est["bloqueado"] or any("interrompida" in str(v) and ("403" in str(v) or "429/503" in str(v)) for v in resumo["etapas"].values()))  # só bloqueio de verdade; limite de horas/consultas deixa tentar de novo
         ESTADO.write_text(json.dumps(est), encoding="utf-8")
+        manter_acordado(False)
         trava.unlink(missing_ok=True)
         log(f"fim: ok={resumo['ok']} consultas={c.n} minutos={resumo['minutos']}")
         for velho in sorted(LOGS.glob("atualizacao_*.log"))[:-30]:

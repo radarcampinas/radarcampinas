@@ -7,6 +7,8 @@
 # ou se já houve 4 tentativas hoje, ele não faz nada. Assim uma atualização interrompida (reinício do Windows Update,
 # computador desligado às 03:00) é refeita sozinha quando o computador volta, sem sobrecarregar o servidor da Câmara.
 # Aos domingos também faz a parte semanal (atos de suplência e Mesa).
+# -WakeToRun pede ao Windows para acordar o computador às 03:00 (em notebooks com "Modern Standby" isso nem sempre funciona;
+# então a tarefa também roda assim que o computador volta, e o programa mantém o computador acordado enquanto trabalha).
 # A janela roda escondida, para não ser fechada por engano no meio da atualização.
 #
 # Uso (PowerShell, na pasta do projeto):   powershell -ExecutionPolicy Bypass -File scripts\agendar_windows.ps1
@@ -26,7 +28,7 @@ $diario.Repetition = $rep
 # gatilho 2: ao entrar no Windows
 $login = New-ScheduledTaskTrigger -AtLogOn -User "$env:USERDOMAIN\$env:USERNAME"
 
-$config = New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 6) -MultipleInstances IgnoreNew -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
+$config = New-ScheduledTaskSettingsSet -StartWhenAvailable -WakeToRun -ExecutionTimeLimit (New-TimeSpan -Hours 6) -MultipleInstances IgnoreNew -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 
 Register-ScheduledTask -TaskName $nome -Action $acao -Trigger @($diario, $login) -Settings $config -Description "Baixa só o que é novo (devagar), regera o site e publica. Repete se o computador reiniciou." -Force | Out-Null
 Write-Host "Tarefa criada: $nome (03:00 + a cada hora até 15:00 + ao entrar no Windows)."
