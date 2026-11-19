@@ -1,0 +1,25 @@
+name: Teste de acesso às fontes oficiais
+
+# Roda só este teste (poucas consultas, devagar) para saber se a Câmara, o PNCP e o TCE-SP respondem aos servidores do GitHub.
+# Dispara sozinho quando este arquivo ou o script de teste mudam, ou à mão na aba Actions.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/teste-acesso.yml"
+      - "scripts/testar_acesso.py"
+
+permissions:
+  contents: read
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Consultar as fontes
+        run: python scripts/testar_acesso.py
