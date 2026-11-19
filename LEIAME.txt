@@ -1,0 +1,3 @@
+Pacote inicial CRIPTOGRAFADO (GnuPG, AES-256) com os dados brutos que a atualização noturna precisa.
+Sem a senha (segredo DADOS_SENHA do repositório) ele é ilegível. Não contém nada em texto aberto.
+Usado só quando o cache do GitHub expira. Para renovar: scripts/dados_cripto.py cifrar.
