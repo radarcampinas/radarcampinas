@@ -44,6 +44,14 @@ python -I -X utf8 scripts/atualizar.py --semanal  # inclui atos de suplência e 
 - `--pular-se-atualizado`: para a tarefa agendada. Não faz nada se hoje já deu certo, se o servidor pediu para diminuir o ritmo hoje (429/403) ou se já houve 4 tentativas hoje (estado em `data/logs/estado.json`).
 - Agendar no Windows (03:00 + a cada hora até 15:00 + ao entrar no Windows, para refazer se o computador reiniciou): `powershell -ExecutionPolicy Bypass -File scripts/agendar_windows.ps1`
 
+## Atualização no GitHub Actions (alternativa ao agendador do Windows)
+`.github/workflows/atualizacao-noturna.yml` roda todo dia às 03:00 (Brasília), igual ao `atualizar.py --publicar`, e dispara a publicação do site.
+- Os dados brutos ficam num pacote **criptografado** (`scripts/dados_cripto.py`, GnuPG AES-256): no cache do GitHub entre as noites e, como reserva, na branch `semente`.
+- A senha é o segredo `DADOS_SENHA` (Settings > Secrets and variables > Actions). No seu computador ela fica em `data/segredos/DADOS_SENHA.txt` (fora do git). Guarde também num gerenciador de senhas.
+- Para renovar a branch `semente` (a cada mês, por exemplo): `DADOS_SENHA=... python scripts/dados_cripto.py cifrar raw.tar.gz.gpg` e envie para a branch `semente`.
+- Teste de acesso às fontes pelo GitHub: `.github/workflows/teste-acesso.yml`.
+- Se usar o GitHub Actions, DESLIGUE a tarefa do Windows (ou rode só à mão), para os dois não publicarem ao mesmo tempo.
+
 ## Ver o site
 ```bash
 node scripts/servir.js site 8768

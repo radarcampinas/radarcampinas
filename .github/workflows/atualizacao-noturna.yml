@@ -1,0 +1,119 @@
+name: Atualização noturna dos dados
+
+# Todo dia às 03:00 em Brasília (06:00 UTC; o Brasil está sem horário de verão): baixa só o que é novo (devagar), regera o site,
+# confere, audita a privacidade e publica. Também pode ser disparada à mão na aba Actions ("Run workflow").
+#
+# Os dados brutos (209 MB, com textos do PNCP que trazem CPF, RG e endereços) NÃO ficam em lugar público:
+#   - entre uma noite e outra eles ficam num pacote CRIPTOGRAFADO (AES-256) guardado no cache do GitHub;
+#   - a senha é o segredo DADOS_SENHA (Settings > Secrets and variables > Actions);
+#   - na primeira vez, ou se o cache expirar (7 dias sem uso), o pacote inicial vem da branch "semente" (também cifrado).
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: atualizacao-noturna
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # envia as mudanças de site/ para a branch main
+  actions: write    # dispara a publicação do GitHub Pages depois (envio com o token padrão não dispara sozinho)
+
+env:
+  TZ: America/Sao_Paulo   # datas e horas do site em horário de Brasília
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Conferir se o segredo existe
+        env:
+          DADOS_SENHA: ${{ secrets.DADOS_SENHA }}
+        run: |
+          if [ -z "$DADOS_SENHA" ]; then
+            echo "::error title=Falta o segredo DADOS_SENHA::Crie em Settings > Secrets and variables > Actions > New repository secret (use o conteúdo de data/segredos/DADOS_SENHA.txt do seu computador)."
+            exit 1
+          fi
+
+      - name: Recuperar os dados cifrados (cache da última noite)
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: estado/raw.tar.gz.gpg
+          key: raw-sem-chave-exata
+          restore-keys: raw-
+
+      - name: Se o cache expirou, usar o pacote inicial (branch semente)
+        run: |
+          if [ ! -s estado/raw.tar.gz.gpg ]; then
+            echo "cache não encontrado: usando o pacote da branch 'semente' (as noites perdidas são recuperadas pela atualização incremental)"
+            mkdir -p estado
+            git fetch --depth 1 origin semente
+            git show FETCH_HEAD:raw.tar.gz.gpg > estado/raw.tar.gz.gpg
+          else
+            echo "cache restaurado: ${{ steps.cache.outputs.cache-matched-key }}"
+          fi
+          ls -la estado/
+
+      - name: Abrir os dados (descriptografar)
+        id: abrir
+        env:
+          DADOS_SENHA: ${{ secrets.DADOS_SENHA }}
+        run: python scripts/dados_cripto.py decifrar estado/raw.tar.gz.gpg
+
+      - name: Identidade dos envios (sem e-mail pessoal)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Atualizar, gerar, auditar e publicar
+        id: atualizar
+        run: |
+          ANTES=$(git rev-parse HEAD)
+          EXTRA=""
+          if [ "$(date +%u)" = "7" ]; then EXTRA="--semanal"; fi   # domingo: também atos de suplência e Mesa
+          RC=0
+          python -I -X utf8 scripts/atualizar.py --publicar $EXTRA || RC=$?
+          if [ "$(git rev-parse HEAD)" != "$ANTES" ]; then echo "mudou=sim" >> "$GITHUB_OUTPUT"; else echo "mudou=nao" >> "$GITHUB_OUTPUT"; fi
+          exit $RC
+
+      - name: Guardar os dados cifrados para a próxima noite
+        if: always() && steps.abrir.outcome == 'success'
+        env:
+          DADOS_SENHA: ${{ secrets.DADOS_SENHA }}
+        run: python scripts/dados_cripto.py cifrar estado/raw.tar.gz.gpg
+
+      - name: Salvar no cache
+        if: always() && steps.abrir.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: estado/raw.tar.gz.gpg
+          key: raw-${{ github.run_id }}
+
+      - name: Publicar o site (GitHub Pages)
+        if: steps.atualizar.outputs.mudou == 'sim'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
+
+      - name: Resumo da execução
+        if: always()
+        run: |
+          {
+            echo "## Atualização noturna"
+            echo '```'
+            cat data/logs/ultima.json 2>/dev/null || echo "sem ultima.json"
+            echo '```'
+            echo "### Fim do log"
+            echo '```'
+            tail -25 data/logs/atualizacao_*.log 2>/dev/null | cut -c1-200
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
