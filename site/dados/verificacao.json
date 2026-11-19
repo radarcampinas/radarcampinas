@@ -1,16 +1,17 @@
 {
- "gerado_em": "2026-11-18",
+ "gerado_em": "2026-11-19",
  "presenca_relatorio": {
   "comparados": 38,
-  "iguais": 10,
+  "iguais": 7,
   "periodo": "01/01/2025 a 14/11/2026",
   "sessoes_base_oficial": 169,
-  "sessoes_com_lista_nossa": 164,
+  "sessoes_com_lista_nossa": 165,
   "diferentes": [
    "Ailton da Farmácia",
    "Arnaldo Salvetti",
    "Benê Lima",
    "Carlinhos Camelô",
+   "Carmo Luiz",
    "Debora Palermo",
    "Dr. Yanko",
    "Edison Ribeiro",
@@ -24,8 +25,10 @@
    "Luiz Cirilo",
    "Luiz Rossini",
    "Marcelo Silva",
+   "Mariana Conti",
    "Marrom Cunha",
    "Mineiro do Espetinho",
+   "Nick Schneider",
    "Otto Alejandro",
    "Paolla Miguel",
    "Paulo Haddad",
@@ -47,7 +50,7 @@
  },
  "presenca_ordemdia": {
   "comparados": 38,
-  "iguais": 10
+  "iguais": 7
  },
  "atas": {
   "amostra": 32,
@@ -113,9 +116,9 @@
   "iguais": 37
  },
  "votos": {
-  "votacoes_desde_inicio": 4557,
-  "votacoes_nominais": 416,
-  "resumo_confere": 4256,
+  "votacoes_desde_inicio": 4585,
+  "votacoes_nominais": 428,
+  "resumo_confere": 4268,
   "resumo_diverge": 7,
   "votaram_sem_constar_na_presenca": 4,
   "sessoes_nominais_sem_lista": 6,
@@ -125,8 +128,8 @@
   "valor_mensal": 17800,
   "cadeiras": 33,
   "inicio": "2025-01-01",
-  "votacoes_com_cadeiras": 406,
-  "votacoes_total": 416,
+  "votacoes_com_cadeiras": 418,
+  "votacoes_total": 428,
   "norma": {
    "id": 53154,
    "nome": "Resolução nº 1.000, de 19 de abril de 2023",
@@ -149,8 +152,8 @@
   "pago_total": 17447502766.42,
   "soma_confere": true,
   "fornecedores_contratos_no_tce": [
-   1241,
-   1483
+   1242,
+   1485
   ],
   "camara_pago": 337480694.57,
   "terceiros_total": 8855294442.34,
@@ -170,9 +173,9 @@
   ]
  },
  "licitacoes": {
-  "compras": 3822,
-  "contratos": 2713,
-  "valor_homologado": 2284185850.61,
+  "compras": 3833,
+  "contratos": 2715,
+  "valor_homologado": 2327922004.85,
   "ids_unicos": true,
   "orgaos": [
    "Camprev",
@@ -183,10 +186,10 @@
    "Setec"
   ],
   "primeira": "2025-01-06",
-  "ultima": "2026-11-17"
+  "ultima": "2026-11-18"
  },
  "extracao": {
-  "indicacoes": 21867,
+  "indicacoes": 21983,
   "com_rua": 0.845,
   "com_bairro": 0.93,
   "amostra_manual": {
