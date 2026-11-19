@@ -189,7 +189,7 @@
   "ultima": "2026-11-18"
  },
  "extracao": {
-  "indicacoes": 21983,
+  "indicacoes": 21987,
   "com_rua": 0.845,
   "com_bairro": 0.93,
   "amostra_manual": {
@@ -199,62 +199,7 @@
    "nota": "Lida à mão por quem fez o site, em 14/11/2026. Amostra pequena: margem de erro grande."
   }
  },
- "downloads": [
-  {
-   "endpoint": "sessao/sessaoplenariapresenca",
-   "esperado": 44013,
-   "baixado": 44013,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/presencaordemdia",
-   "esperado": 42360,
-   "baixado": 42360,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/ordemdia",
-   "esperado": 13925,
-   "baixado": 13925,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/expedientemateria",
-   "esperado": 14365,
-   "baixado": 14365,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/registrovotacao",
-   "esperado": 27597,
-   "baixado": 27597,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/votoparlamentar",
-   "esperado": 131079,
-   "baixado": 131079,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/justificativaausencia",
-   "esperado": 0,
-   "baixado": 0,
-   "ok": true
-  },
-  {
-   "endpoint": "materia/autoria",
-   "esperado": 447960,
-   "baixado": 447960,
-   "ok": true
-  },
-  {
-   "endpoint": "materia/materialegislativa (desde 2025)",
-   "esperado": 30721,
-   "baixado": 30721,
-   "ok": true
-  }
- ],
+ "downloads": [],
  "correcoes": [
   {
    "data": "14/11/2026",
