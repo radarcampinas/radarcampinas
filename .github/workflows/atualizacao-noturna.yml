@@ -107,21 +107,11 @@ jobs:
           key: raw-${{ github.run_id }}
 
       - name: Publicar o site (GitHub Pages)
-        if: steps.atualizar.outputs.mudou == 'sim'
+        if: always() && steps.atualizar.outputs.mudou == 'sim'   # mesmo que uma etapa tenha falhado, o que foi gerado e enviado precisa ir ao ar
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run pages.yml --ref main
 
-      - name: Resumo da execução
+      - name: Resumo da execução (anotações com o motivo das falhas)
         if: always()
-        run: |
-          {
-            echo "## Atualização noturna"
-            echo '```'
-            cat data/logs/ultima.json 2>/dev/null || echo "sem ultima.json"
-            echo '```'
-            echo "### Fim do log"
-            echo '```'
-            tail -25 data/logs/atualizacao_*.log 2>/dev/null | cut -c1-200
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
+        run: python scripts/resumo_ci.py

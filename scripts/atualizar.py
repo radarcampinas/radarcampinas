@@ -465,7 +465,11 @@ def main():
         log(f"fim: ok={resumo['ok']} consultas={c.n} minutos={resumo['minutos']}")
         for velho in sorted(LOGS.glob("atualizacao_*.log"))[:-30]:
             velho.unlink()
-    return 0 if resumo["ok"] else 1
+    e = resumo["etapas"]
+    critico_ok = (a.so_gerar or e.get("sapl") == "ok") and (a.so_baixar or e.get("gerar") == "ok") and (not a.publicar or a.so_baixar or e.get("publicar") == "ok")
+    if critico_ok and not resumo["ok"]:
+        log("aviso: as etapas principais (Câmara, gerar e publicar) deram certo; alguma etapa de apoio (leis, TCE-SP ou PNCP) não terminou e será tentada de novo na próxima execução")
+    return 0 if (resumo["ok"] or critico_ok) else 1
 
 
 if __name__ == "__main__":
