@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-19",
+ "gerado_em": "2026-11-20",
  "presenca_relatorio": {
   "comparados": 38,
   "iguais": 7,
@@ -189,7 +189,7 @@
   "ultima": "2026-11-18"
  },
  "extracao": {
-  "indicacoes": 21987,
+  "indicacoes": 22003,
   "com_rua": 0.845,
   "com_bairro": 0.93,
   "amostra_manual": {
