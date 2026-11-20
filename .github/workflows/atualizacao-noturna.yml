@@ -11,6 +11,11 @@ on:
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
+    inputs:
+      forcar:
+        description: "Atualizar mesmo que o site já tenha sido atualizado hoje"
+        type: boolean
+        default: false
 
 concurrency:
   group: atualizacao-noturna
@@ -81,7 +86,10 @@ jobs:
           EXTRA=""
           if [ "$(date +%u)" = "7" ]; then EXTRA="--semanal"; fi   # domingo: também atos de suplência e Mesa
           RC=0
-          python -I -X utf8 scripts/atualizar.py --publicar $EXTRA || RC=$?
+          # sem "forçar", não faz nada se o site já foi atualizado hoje (por exemplo, pelo computador de reserva)
+          PULAR="--pular-se-atualizado"
+          if [ "${{ inputs.forcar }}" = "true" ]; then PULAR=""; fi
+          python -I -X utf8 scripts/atualizar.py --publicar $PULAR $EXTRA || RC=$?
           if [ "$(git rev-parse HEAD)" != "$ANTES" ]; then echo "mudou=sim" >> "$GITHUB_OUTPUT"; else echo "mudou=nao" >> "$GITHUB_OUTPUT"; fi
           exit $RC
 

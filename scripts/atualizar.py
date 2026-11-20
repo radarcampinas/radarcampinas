@@ -332,7 +332,13 @@ def publicar():
     if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=RAIZ).returncode == 0:
         log("publicar: nada mudou em site/, não há o que enviar"); return
     git("commit", "-m", f"Atualização dos dados {date.today()}")
-    git("push")
+    try:
+        git("push")
+    except RuntimeError as e:
+        # outro envio chegou antes (ex.: GitHub Actions). Como site/ é todo regerado, nossa versão recente vence os conflitos (-X theirs no rebase = nosso commit).
+        log(f"push recusado ({str(e)[-120:]}); refaço por cima do que chegou e tento de novo")
+        git("pull", "--rebase", "--autostash", "-X", "theirs")
+        git("push")
     log("publicar: enviado ao GitHub (o site é republicado em 1 a 2 minutos)")
 
 
@@ -376,6 +382,18 @@ def _estado():
     return {"data": hoje, "tentativas": 0, "concluido": False, "bloqueado": False}
 
 
+def ja_publicado_hoje():
+    """True se o site publicado no GitHub (origin/main) já foi atualizado hoje, por qualquer um (GitHub Actions ou este computador)."""
+    env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
+    try:
+        subprocess.run(["git", "fetch", "-q", "origin", "main"], cwd=RAIZ, timeout=90, capture_output=True, env=env)
+        r = subprocess.run(["git", "show", "origin/main:site/dados/atualizacao.json"], cwd=RAIZ, capture_output=True, text=True, encoding="utf-8", timeout=30, env=env)
+        texto = r.stdout if r.returncode == 0 else (SITE / "dados" / "atualizacao.json").read_text(encoding="utf-8")
+        return str(json.loads(texto).get("em", ""))[:10] == str(date.today())
+    except Exception:
+        return False  # na dúvida, atualiza
+
+
 def main():
     global _log_arq
     ap = argparse.ArgumentParser()
@@ -401,6 +419,10 @@ def main():
         motivo = "hoje já foi atualizado com sucesso" if est["concluido"] else "o servidor pediu para diminuir o ritmo hoje; tento amanhã" if est["bloqueado"] else f"já houve {est['tentativas']} tentativas hoje" if est["tentativas"] >= MAX_TENTATIVAS_POR_DIA else ""
         if motivo:
             log(f"pulado: {motivo}"); return 0
+        if ja_publicado_hoje():
+            est["concluido"] = True
+            ESTADO.write_text(json.dumps(est), encoding="utf-8")
+            log("pulado: o site publicado no GitHub já foi atualizado hoje (a atualização do GitHub Actions ou de outro computador serve)"); return 0
     est["tentativas"] += 1
     ESTADO.write_text(json.dumps(est), encoding="utf-8")
     trava.write_text(str(os.getpid()))

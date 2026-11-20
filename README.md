@@ -50,7 +50,8 @@ python -I -X utf8 scripts/atualizar.py --semanal  # inclui atos de suplência e 
 - A senha é o segredo `DADOS_SENHA` (Settings > Secrets and variables > Actions). No seu computador ela fica em `data/segredos/DADOS_SENHA.txt` (fora do git). Guarde também num gerenciador de senhas.
 - Para renovar a branch `semente` (a cada mês, por exemplo): `DADOS_SENHA=... python scripts/dados_cripto.py cifrar raw.tar.gz.gpg` e envie para a branch `semente`.
 - Teste de acesso às fontes pelo GitHub: `.github/workflows/teste-acesso.yml`.
-- Se usar o GitHub Actions, DESLIGUE a tarefa do Windows (ou rode só à mão), para os dois não publicarem ao mesmo tempo.
+- O computador (tarefa do Windows, `agendar_windows.ps1`) fica como **reserva**: das 09:00 às 21:00 e ao entrar no Windows ele só atualiza se o site publicado ainda não foi atualizado hoje (`ja_publicado_hoje()` em `atualizar.py`). Se um envio for recusado por chegar commit novo, ele refaz por cima (`pull --rebase -X theirs`) e tenta de novo.
+- No GitHub, "Run workflow" tem a opção **forçar** para atualizar mesmo que o site já esteja atualizado hoje.
 
 ## Ver o site
 ```bash
