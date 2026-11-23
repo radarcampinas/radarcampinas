@@ -290,7 +290,7 @@ def rodar(script, *args):
     log(f"{script}: ok {saida[-160:]}")
 
 
-def gerar(semanal):
+def gerar(semanal, pendentes=()):
     copia = RAIZ / "data" / "backup_dados"
     if copia.exists():
         shutil.rmtree(copia)
@@ -310,7 +310,7 @@ def gerar(semanal):
         a, d = antes["meta"], depois["meta"]
         if len(depois["vereadores"]) < len(antes["vereadores"]) or d["total_sessoes_com_lista"] < a["total_sessoes_com_lista"] or d["total_votacoes_nominais"] < a["total_votacoes_nominais"]:
             raise RuntimeError("os números diminuíram em relação a ontem (sessões, votações ou vereadores); desfaço a atualização")
-        (SITE / "dados" / "atualizacao.json").write_text(json.dumps({"em": datetime.now().isoformat(timespec="minutes")}), encoding="utf-8")
+        (SITE / "dados" / "atualizacao.json").write_text(json.dumps({"em": datetime.now().isoformat(timespec="minutes"), "pendentes": list(pendentes)}), encoding="utf-8")
         log(f"conferência: sessões {a['total_sessoes_com_lista']}→{d['total_sessoes_com_lista']}, votações nominais {a['total_votacoes_nominais']}→{d['total_votacoes_nominais']}")
     except Exception:
         log("ERRO ao gerar: devolvo a cópia de ontem de site/dados")
@@ -383,13 +383,19 @@ def _estado():
 
 
 def ja_publicado_hoje():
-    """True se o site publicado no GitHub (origin/main) já foi atualizado hoje, por qualquer um (GitHub Actions ou este computador)."""
+    """True se o site publicado no GitHub (origin/main) já foi atualizado hoje por completo, por qualquer um (GitHub Actions ou este computador)."""
     env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
     try:
         subprocess.run(["git", "fetch", "-q", "origin", "main"], cwd=RAIZ, timeout=90, capture_output=True, env=env)
         r = subprocess.run(["git", "show", "origin/main:site/dados/atualizacao.json"], cwd=RAIZ, capture_output=True, text=True, encoding="utf-8", timeout=30, env=env)
         texto = r.stdout if r.returncode == 0 else (SITE / "dados" / "atualizacao.json").read_text(encoding="utf-8")
-        return str(json.loads(texto).get("em", ""))[:10] == str(date.today())
+        pub = json.loads(texto)
+        if str(pub.get("em", ""))[:10] != str(date.today()):
+            return False
+        if pub.get("pendentes"):
+            log(f"o site de hoje está publicado, mas ficou pendente: {', '.join(pub['pendentes'])}; tento de novo")
+            return False
+        return True
     except Exception:
         return False  # na dúvida, atualiza
 
@@ -442,7 +448,14 @@ def main():
         if not a.so_baixar:
             sapl_ok = a.so_gerar or resumo["etapas"].get("sapl") == "ok"
             if sapl_ok:
-                gerar(a.semanal); resumo["etapas"]["gerar"] = "ok"
+                if a.so_gerar:  # sem baixar nada, mantém o que já estava pendente
+                    try:
+                        pend = json.loads((SITE / "dados" / "atualizacao.json").read_text(encoding="utf-8")).get("pendentes", [])
+                    except Exception:
+                        pend = []
+                else:  # etapas de apoio que não terminaram (ou nem chegaram a rodar)
+                    pend = [k for k in ("leis", "tce", "pncp") if resumo["etapas"].get(k) != "ok"]
+                gerar(a.semanal, pend); resumo["etapas"]["gerar"] = "ok"
                 if a.publicar:
                     try:
                         publicar(); resumo["etapas"]["publicar"] = "ok"
@@ -458,7 +471,7 @@ def main():
         resumo.update({"fim": datetime.now().isoformat(timespec="seconds"), "consultas": c.n, "minutos": round((time.time() - inicio) / 60, 1)})
         (LOGS / "ultima.json").write_text(json.dumps(resumo, ensure_ascii=False, indent=1), encoding="utf-8")
         est["concluido"] = bool(est["concluido"] or (resumo["ok"] and (a.so_gerar or resumo["etapas"].get("sapl") == "ok")))
-        est["bloqueado"] = bool(est["bloqueado"] or any("interrompida" in str(v) and ("403" in str(v) or "429/503" in str(v)) for v in resumo["etapas"].values()))  # só bloqueio de verdade; limite de horas/consultas deixa tentar de novo
+        est["bloqueado"] = bool(est["bloqueado"] or any("interrompida" in str(v) and (k == "sapl" or "403" in str(v)) for k, v in resumo["etapas"].items()))  # só bloqueio de verdade; limite de horas/consultas deixa tentar de novo
         ESTADO.write_text(json.dumps(est), encoding="utf-8")
         manter_acordado(False)
         trava.unlink(missing_ok=True)

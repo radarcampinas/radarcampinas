@@ -9,7 +9,8 @@ name: Atualização noturna dos dados
 #   - na primeira vez, ou se o cache expirar (7 dias sem uso), o pacote inicial vem da branch "semente" (também cifrado).
 on:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 6 * * *"    # 03:00 em Brasília: Câmara, leis e TCE-SP
+    - cron: "0 15 * * *"   # 12:00 em Brasília: refaz se algo ficou pendente (o PNCP costuma responder 503 de madrugada); senão não faz nada
   workflow_dispatch:
     inputs:
       forcar:

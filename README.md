@@ -51,6 +51,7 @@ python -I -X utf8 scripts/atualizar.py --semanal  # inclui atos de suplência e 
 - Para renovar a branch `semente` (a cada mês, por exemplo): `DADOS_SENHA=... python scripts/dados_cripto.py cifrar raw.tar.gz.gpg` e envie para a branch `semente`.
 - Teste de acesso às fontes pelo GitHub: `.github/workflows/teste-acesso.yml`.
 - O computador (tarefa do Windows, `agendar_windows.ps1`) fica como **reserva**: das 09:00 às 21:00 e ao entrar no Windows ele só atualiza se o site publicado ainda não foi atualizado hoje (`ja_publicado_hoje()` em `atualizar.py`). Se um envio for recusado por chegar commit novo, ele refaz por cima (`pull --rebase -X theirs`) e tenta de novo.
+- O PNCP costuma responder 503 de madrugada. Quando uma etapa de apoio (leis, TCE-SP ou PNCP) não termina, `site/dados/atualizacao.json` registra `"pendentes"`; enquanto houver pendência, as próximas execuções do dia (GitHub às 12:00 e o computador de reserva) rodam de novo por completo.
 - No GitHub, "Run workflow" tem a opção **forçar** para atualizar mesmo que o site já esteja atualizado hoje.
 
 ## Ver o site

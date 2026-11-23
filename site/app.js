@@ -63,6 +63,9 @@ function linhaAoVivo() {
   const f = [`Câmara até a sessão de ${dataBR(m.ultima_sessao_com_lista)}`];
   if (V.gastos) f.push(`Gastos (TCE-SP) até ${mesLongo(V.gastos.ultimo)}`);
   if (V.licitacoes) f.push(`Licitações (PNCP) até ${dataBR(V.licitacoes.ultima)}`);
+  const NOMES = {leis: "leis", tce: "gastos (TCE-SP)", pncp: "licitações (PNCP)"};
+  const pend = ((ATUAL && ATUAL.pendentes) || []).map(k => NOMES[k] || k);
+  if (pend.length) f.push(`<b>Atualização de hoje pendente:</b> ${pend.join(", ")} (a fonte não respondeu; tentamos de novo mais tarde)`);
   const em = ATUAL && ATUAL.em ? ATUAL.em : m.gerado_em + "T00:00:00";
   const dias = Math.floor((Date.now() - new Date(em).getTime()) / 864e5);
   if (dias >= 3) {
