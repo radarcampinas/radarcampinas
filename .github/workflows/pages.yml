@@ -20,12 +20,31 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.tentativa3.outputs.page_url || steps.tentativa2.outputs.page_url || steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
+
+      # Às vezes o GitHub não lista logo o arquivo que acabou de receber ("No artifacts named github-pages were found",
+      # sem incidente no githubstatus.com). Nesse caso esperamos um pouco e tentamos de novo, até 3 vezes no total.
       - id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Esperar 1 minuto antes de tentar de novo
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 60
+      - id: tentativa2
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Esperar 3 minutos antes da última tentativa
+        if: steps.deployment.outcome == 'failure' && steps.tentativa2.outcome == 'failure'
+        run: sleep 180
+      - id: tentativa3
+        if: steps.deployment.outcome == 'failure' && steps.tentativa2.outcome == 'failure'
         uses: actions/deploy-pages@v4
