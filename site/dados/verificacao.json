@@ -1,5 +1,5 @@
 {
- "gerado_em": "2026-11-24",
+ "gerado_em": "2026-11-25",
  "presenca_relatorio": {
   "comparados": 38,
   "iguais": 5,
@@ -115,7 +115,7 @@
  },
  "autoria": {
   "comparados": 38,
-  "iguais": 36
+  "iguais": 35
  },
  "votos": {
   "votacoes_desde_inicio": 4614,
@@ -154,8 +154,8 @@
   "pago_total": 17447502766.42,
   "soma_confere": true,
   "fornecedores_contratos_no_tce": [
-   1244,
-   1498
+   1242,
+   1485
   ],
   "camara_pago": 337480694.57,
   "terceiros_total": 8855294442.34,
@@ -175,9 +175,9 @@
   ]
  },
  "licitacoes": {
-  "compras": 3865,
-  "contratos": 2742,
-  "valor_homologado": 2331068639.73,
+  "compras": 3833,
+  "contratos": 2715,
+  "valor_homologado": 2327922004.85,
   "ids_unicos": true,
   "orgaos": [
    "Camprev",
@@ -188,10 +188,10 @@
    "Setec"
   ],
   "primeira": "2025-01-06",
-  "ultima": "2026-11-23"
+  "ultima": "2026-11-18"
  },
  "extracao": {
-  "indicacoes": 22009,
+  "indicacoes": 22094,
   "com_rua": 0.845,
   "com_bairro": 0.93,
   "amostra_manual": {
@@ -201,62 +201,7 @@
    "nota": "Lida à mão por quem fez o site, em 14/11/2026. Amostra pequena: margem de erro grande."
   }
  },
- "downloads": [
-  {
-   "endpoint": "sessao/sessaoplenariapresenca",
-   "esperado": 44013,
-   "baixado": 44013,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/presencaordemdia",
-   "esperado": 42360,
-   "baixado": 42360,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/ordemdia",
-   "esperado": 13925,
-   "baixado": 13925,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/expedientemateria",
-   "esperado": 14365,
-   "baixado": 14365,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/registrovotacao",
-   "esperado": 27597,
-   "baixado": 27597,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/votoparlamentar",
-   "esperado": 131079,
-   "baixado": 131079,
-   "ok": true
-  },
-  {
-   "endpoint": "sessao/justificativaausencia",
-   "esperado": 0,
-   "baixado": 0,
-   "ok": true
-  },
-  {
-   "endpoint": "materia/autoria",
-   "esperado": 447960,
-   "baixado": 447960,
-   "ok": true
-  },
-  {
-   "endpoint": "materia/materialegislativa (desde 2025)",
-   "esperado": 30721,
-   "baixado": 30721,
-   "ok": true
-  }
- ],
+ "downloads": [],
  "correcoes": [
   {
    "data": "14/11/2026",
