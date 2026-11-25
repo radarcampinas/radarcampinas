@@ -115,7 +115,7 @@
  },
  "autoria": {
   "comparados": 38,
-  "iguais": 35
+  "iguais": 34
  },
  "votos": {
   "votacoes_desde_inicio": 4614,
@@ -146,20 +146,20 @@
   "revisao_posterior": false
  },
  "gastos": {
-  "registros": 383301,
-  "meses": 21,
+  "registros": 402449,
+  "meses": 22,
   "primeiro": "2025-01",
-  "ultimo": "2026-09",
+  "ultimo": "2026-10",
   "sem_buracos": true,
-  "pago_total": 17447502766.42,
+  "pago_total": 18298384852.05,
   "soma_confere": true,
   "fornecedores_contratos_no_tce": [
-   1242,
-   1485
+   1286,
+   1505
   ],
-  "camara_pago": 337480694.57,
-  "terceiros_total": 8855294442.34,
-  "internos_total": 8446809926.72,
+  "camara_pago": 355144852.54,
+  "terceiros_total": 9299123564.05,
+  "internos_total": 8844827364.01,
   "segunda_fonte_dos_totais": false,
   "contratos_acima_1bi": [
    {
@@ -175,9 +175,9 @@
   ]
  },
  "licitacoes": {
-  "compras": 3833,
-  "contratos": 2715,
-  "valor_homologado": 2327922004.85,
+  "compras": 3876,
+  "contratos": 2754,
+  "valor_homologado": 2331479604.85,
   "ids_unicos": true,
   "orgaos": [
    "Camprev",
@@ -188,7 +188,7 @@
    "Setec"
   ],
   "primeira": "2025-01-06",
-  "ultima": "2026-11-18"
+  "ultima": "2026-11-24"
  },
  "extracao": {
   "indicacoes": 22094,
